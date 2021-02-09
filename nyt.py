@@ -35,5 +35,5 @@ def get_article_data(keyword):
     return {
         'headlines': list(headlines),
         'snippets': list(snippets),
-        'urls': list(urls)
+        'urls': list(urls),
     }

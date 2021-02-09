@@ -12,13 +12,15 @@ def hello_world():
 
     keyword_query = 'Fashion' # Change it to something you're interested in!
     article_data = get_article_data(keyword_query)
+    urls=article_data['urls']
+    print(urls)
     
     return render_template(
         "index.html",
         topic=keyword_query,
         headlines=article_data['headlines'],
         snippets=article_data['snippets'],
-        urls=article_data['urls']
+        urls=article_data['urls'],
     )
 
 app.run(
