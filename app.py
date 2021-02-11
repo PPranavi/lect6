@@ -1,7 +1,8 @@
 import os
-
+from markupsafe import escape
 from flask import Flask, render_template
 from nyt import get_article_data
+import json
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -21,6 +22,17 @@ def hello_world():
         dates=article_data['dates'],
         urls=article_data['urls'],
     )
+
+@app.route('/search/<user_text>')
+def print_user_text(user_text):
+    print("%s" % user_text)
+    keyword_query = user_text
+    article_data = get_article_data(keyword_query)
+    headlines=article_data['headlines']
+    return {
+        "headlines": headlines,
+    }
+
 
 app.run(
     host=os.getenv('IP', '0.0.0.0'),
